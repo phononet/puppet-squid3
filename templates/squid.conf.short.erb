@@ -26,8 +26,10 @@ acl Safe_ports port 777		# multiling http
 acl CONNECT method CONNECT
 
 # predefined http_accesses
+<% if @old_squid_format %>
 http_access allow manager localhost
 http_access deny manager
+<% end %>
 http_access deny !Safe_ports
 http_access deny CONNECT !SSL_ports
 
@@ -70,7 +72,9 @@ hierarchy_stoplist             cgi-bin ?
 coredump_dir                   /var/spool/squid
 maximum_object_size_in_memory  <%= @maximum_object_size_in_memory  %>
 maximum_object_size            <%= @maximum_object_size            %>
+<% if @ignore_expect_100 != "off" -%>
 ignore_expect_100              <%= @ignore_expect_100              %>
+<% end %>
 cache_mgr                      <%= @cache_mgr                      %>
 client_persistent_connections  <%= @client_persistent_connections  %>
 server_persistent_connections  <%= @server_persistent_connections  %>
