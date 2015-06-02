@@ -4,7 +4,7 @@ class squid3::params {
 
   case $::osfamily {
     'RedHat': {
-      if $::operatingsystemrelease < 6 {
+      if $::operatingsystemajrelease < 6 {
         $package_name = 'squid3'
       } else {
         $package_name = 'squid'
@@ -35,4 +35,3 @@ class squid3::params {
   $cache_store_log = "${log_directory}/store.log"
 
 }
-
